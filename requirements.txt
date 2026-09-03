@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+streamlit
+python-multipart
+openai-whisper
+langchain
+langchain-groq
+python-dotenv
+requests
+ffmpeg
+streamlit-webrtc
+websocket-client
+scipy
+silero-vad

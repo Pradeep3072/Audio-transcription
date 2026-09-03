@@ -1,0 +1,14 @@
+.env
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+.pytest_cache/
+uploads/
+backend.log
+frontend.log
+*.wav
+*.mp3
+*.m4a
+*.ogg
