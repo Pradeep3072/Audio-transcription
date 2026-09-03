@@ -18,7 +18,7 @@ class WhisperService:
         print("[Whisper] Whisper model loaded!")
 
 
-    def transcribe(self, audio_bytes: bytes, language: str = None):
+    def transcribe(self, audio_bytes: bytes, language: str = None, filename: str = None):
 
         temp_file = None
 

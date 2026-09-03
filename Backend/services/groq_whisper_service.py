@@ -16,7 +16,7 @@ class GroqWhisperService:
             self.client = Groq(api_key=self.api_key)
         print("Groq Whisper Service ready.")
 
-    def transcribe(self, audio_bytes: bytes, language: str = None) -> str:
+    def transcribe(self, audio_bytes: bytes, language: str = None, filename: str = None) -> str:
         """
         Transcribes audio using Groq's whisper-large-v3 model.
         """
@@ -26,8 +26,13 @@ class GroqWhisperService:
 
         temp_file = None
         try:
+            # Preserve original extension if provided, otherwise default to .wav
+            ext = os.path.splitext(filename)[1] if filename else ".wav"
+            if not ext:
+                ext = ".wav"
+                
             # Write bytes to temp file so Groq SDK can read it
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+            with tempfile.NamedTemporaryFile(suffix=ext, delete=False) as f:
                 f.write(audio_bytes)
                 temp_file = f.name
 

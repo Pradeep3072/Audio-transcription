@@ -110,7 +110,8 @@ async def transcribe_file(
     raw_text = await asyncio.to_thread(
         active_whisper_service.transcribe,
         audio_bytes,
-        whisper_lang
+        whisper_lang,
+        file.filename
     )
     
     # Correct with Agent without blocking event loop
@@ -126,4 +127,5 @@ async def transcribe_file(
         "corrected_text": agent_result.get("corrected_text", ""),
         "summary": agent_result.get("summary", ""),
         "evaluation": agent_result.get("evaluation")
-    }# Trigger reload
+    }
+# Trigger reload
