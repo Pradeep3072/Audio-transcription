@@ -26,6 +26,8 @@ A full-stack application that provides file-upload transcription capabilities us
 
 ## 🔄 Workflow & Architecture
 
+![Workflow Architecture](Audio-transcription.png)
+
 The application is split into a **Frontend (Streamlit)** and a **Backend (FastAPI)**. It supports the following workflow:
 
 ### 1. Audio File Upload
@@ -35,8 +37,8 @@ This method allows users to upload pre-recorded audio files for bulk transcripti
 1. **Upload Interface:** The user navigates to the Streamlit app and uploads an audio file (e.g., `.wav`, `.mp3`).
 2. **HTTP Request:** The frontend sends the file as form-data via a standard HTTP POST request.
    - **Endpoint:** `POST http://127.0.0.1:8000/transcribe`
-3. **Transcription:** The FastAPI backend receives the `UploadFile` (and the `language` selection), reads the raw bytes, and passes them directly to the **Whisper** model.
-4. **Response:** The backend returns a JSON payload containing the original filename and the complete transcript, which Streamlit immediately displays to the user.
+3. **Transcription:** The FastAPI backend receives the `UploadFile`, language selection, and cloud toggle. Depending on the cloud toggle, it sends the audio bytes to either the local **Whisper** model or the fast **Groq Cloud API** for transcription.
+4. **Response:** The backend returns a JSON payload containing the original filename, the complete transcript, and AI agent corrections, which Streamlit immediately displays to the user.
 
 ### 2. AI Proofreading & Summarization Agent
 To enhance the raw Whisper transcription, the backend employs a **Langchain Agent** powered by a Groq LLM (`openai/gpt-oss-20b`).
